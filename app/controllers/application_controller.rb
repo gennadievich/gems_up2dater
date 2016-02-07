@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   helper_method :display_errors_for
 
   def display_errors_for(smth)
-    smth.errors.full_messages.each do |error|
-      flash.now[:error] = error
-    end
+    errors = smth.errors.full_messages.join("<br/>").html_safe
+
+    flash.now[:error] = errors
   end
 end
