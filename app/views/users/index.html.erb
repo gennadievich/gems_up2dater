@@ -1,4 +1,4 @@
-<h1>Users#index</h1>
+<h2>All Users</h2>
 
 <table>
   <thead>
@@ -14,12 +14,9 @@
       <tr>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
-        <td><%= user.created_at %></td>
+        <td><%= user.created_at.strftime("%d/%m/%Y") %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<div>
-  <%= link_to "New user", new_user_path %>
-</div>

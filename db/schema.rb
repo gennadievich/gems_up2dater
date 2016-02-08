@@ -20,10 +20,10 @@ ActiveRecord::Schema.define(version: 20160207124753) do
     t.string   "name"
     t.string   "email"
     t.string   "password_digest"
-    t.integer  "role_id"
-    t.integer  "sign_in_count"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "role_id",         default: 1
+    t.integer  "sign_in_count",   default: 0
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
 end

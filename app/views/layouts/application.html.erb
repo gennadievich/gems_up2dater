@@ -10,6 +10,14 @@
   </head>
 
   <body>
+    <%=
+      link_to_if(current_user.nil?, "Login", login_path) do
+        link_to("Logout", logout_path)
+      end
+    %>
+
+    <%= link_to_if(current_user.nil?, "Register", register_path) do "" end %>
+
     <%= render partial: "layouts/errors" %>
 
     <%= yield %>

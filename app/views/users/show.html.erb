@@ -1,0 +1,19 @@
+<h2><%= current_user.name %>'s page</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Register date</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><%= @user.name %></td>
+      <td><%= @user.email %></td>
+      <td><%= @user.created_at.strftime("%d/%m/%Y") %></td>
+    </tr>
+  </tbody>
+</table>
