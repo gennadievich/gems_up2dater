@@ -10,16 +10,8 @@
   </head>
 
   <body>
-    <header class="container">
-      <div class="row">
-        <%=
-          link_to_if(current_user.nil?, "Login", login_path) do
-            link_to("Logout", logout_path)
-          end
-        %>
-
-        <%= link_to_if(current_user.nil?, "Register", register_path) do "" end %>
-      </div>
+    <header>
+      <%= render partial: "layouts/nav" %>
     </header>
 
     <div class="container">
@@ -34,10 +26,5 @@
       </div>
     </div>
 
-    <div class="container">
-      <div class="row">
-        <%= link_to "Home", root_path %>
-      </div>
-    </div>
   </body>
 </html>
