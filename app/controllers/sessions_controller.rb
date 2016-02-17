@@ -7,9 +7,9 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(params[:password])
       login @user
 
-      redirect_to user_path(@user), flash: {success: "Welcome, #{current_user.name}"}
+      redirect_to user_path(@user), flash: {success: "Welcome back, #{current_user.name}"}
     else
-      flash.now[:error] = "Check your email/password"
+      flash.now[:warning] = "Check your email/password"
       render :index
     end
 

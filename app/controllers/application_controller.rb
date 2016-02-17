@@ -3,10 +3,10 @@ class ApplicationController < ActionController::Base
 
   helper_method :display_errors_for, :current_user
 
-  def display_errors_for(smth)
-    errors = smth.errors.full_messages.join("<br/>").html_safe
+  def display_errors_for(model, flash_type = :warning)
+    errors = model.errors.full_messages.join("<br/>").html_safe
 
-    flash.now[:error] = errors
+    flash.now[flash_type] = errors
   end
 
   def current_user

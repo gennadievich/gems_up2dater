@@ -11,7 +11,7 @@ feature "User login" do
 
     click_button "Login"
 
-    expect(page).to have_content("Welcome, #{user.name}")
+    expect(page).to have_content("Welcome back, #{user.name}")
     expect(page).to have_content("#{user.name}'s page")
   end
 
