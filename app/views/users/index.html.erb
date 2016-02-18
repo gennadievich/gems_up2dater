@@ -1,20 +1,31 @@
 <h2>All Users</h2>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
+      <th>Id</th>
       <th>Name</th>
       <th>Email</th>
+      <th>Role</th>
+      <th>Sign in count</th>
       <th>Register date</th>
+      <th>Controls</th>
     </tr>
   </thead>
 
   <tbody>
     <% @users.each do |user| %>
       <tr>
+        <td><%= user.id %></td>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
+        <td><%= user.role.name %></td>
+        <td><%= user.sign_in_count %></td>
         <td><%= user.created_at.strftime("%d/%m/%Y") %></td>
+        <td>
+          <%= link_to "", user_path(user), class: "glyphicon glyphicon-info-sign" %>
+          <%= link_to "", user, method: :delete, data: {confirm: "Delete #{user.name}?"}, class: "glyphicon glyphicon-remove-circle" %>
+        </td>
       </tr>
     <% end %>
   </tbody>
