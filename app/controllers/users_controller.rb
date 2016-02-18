@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
     if @user.save
       login @user
-      redirect_to users_path, flash: {success: "User created!"}
+      redirect_to user_path(@user), flash: {success: "You successfully registered!"}
     else
       display_errors_for(@user)
       render :new
