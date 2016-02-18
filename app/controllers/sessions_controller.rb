@@ -17,6 +17,6 @@ class SessionsController < ApplicationController
 
   def destroy
     logout
-    redirect_to root_path
+    redirect_to root_path, flash: {success: "See you soon!"}
   end
 end

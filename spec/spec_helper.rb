@@ -43,6 +43,6 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.before(:suite) do
-    Rails.application.load_seed
+    Rails.application.load_seed # loading seeds
   end
 end

@@ -34,4 +34,33 @@ feature "Users" do
     expect(page).to have_content("Name can't be blank")
     expect(page).to have_content("Email can't be blank")
   end
+
+  scenario "Admin successfully deletes user" do
+    user  = FactoryGirl.create(:user)
+    admin = FactoryGirl.create(:user)
+    admin.update_column(:role_id, 2)
+
+    sign_in(admin)
+    visit users_path
+
+    first('.glyphicon-trash').click #click delete button
+
+    expect(User.count).to be(1)
+    expect(page).to have_content("User '#{user.name}' was successfully deleted.")
+  end
+
+  scenario "Admin tries to delete another admin" do
+    admin_del = FactoryGirl.create(:user)
+    admin_del.update_column(:role_id, 2)
+    admin = FactoryGirl.create(:user)
+    admin.update_column(:role_id, 2)
+
+    sign_in(admin)
+    visit users_path
+
+    first('.glyphicon-trash').click #click delete button
+
+    expect(User.count).to be(2)
+    expect(page).to have_content("You are not allowed to delete admins.")
+  end
 end

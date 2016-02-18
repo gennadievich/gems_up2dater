@@ -1,4 +1,6 @@
-<h2>All Users</h2>
+<h2>All Users
+  <%= link_to "", new_user_path, html_options = {class: "glyphicon glyphicon-plus col-sm-offset-10 green", title: "Create new user"} %>
+</h2>
 
 <table class="table table-striped">
   <thead>
@@ -15,7 +17,7 @@
 
   <tbody>
     <% @users.each do |user| %>
-      <tr>
+      <tr class=<%= "success" if user.admin? %>>
         <td><%= user.id %></td>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
@@ -23,8 +25,9 @@
         <td><%= user.sign_in_count %></td>
         <td><%= user.created_at.strftime("%d/%m/%Y") %></td>
         <td>
-          <%= link_to "", user_path(user), class: "glyphicon glyphicon-info-sign" %>
-          <%= link_to "", user, method: :delete, data: {confirm: "Delete #{user.name}?"}, class: "glyphicon glyphicon-remove-circle" %>
+          <%= link_to "", user_path(user), class: "glyphicon glyphicon-info-sign", title: "User's page" %>
+          <%= link_to "", edit_user_path(user), class: "glyphicon glyphicon-cog", title: "Edit user" %>
+          <%= link_to "", user, method: :delete, data: {confirm: "Delete #{user.name}?"}, class: "glyphicon glyphicon-trash red", title: "Delete user" %>
         </td>
       </tr>
     <% end %>

@@ -14,12 +14,17 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    if @user.save
-      login @user
-      redirect_to user_path(@user), flash: {success: "You successfully registered!"}
+    if current_user && current_user.admin?
+      redirect_to :back, flash: {warning: "In development..."}
     else
-      display_errors_for(@user)
-      render :new
+      if @user.save
+        login @user
+
+        redirect_to user_path(@user), flash: {success: "You successfully registered!"}
+      else
+        display_errors_for(@user)
+        render :new
+      end
     end
   end
 
@@ -32,6 +37,8 @@ class UsersController < ApplicationController
       @user.delete
 
       redirect_to :back, flash: {success: "User '#{@user.name}' was successfully deleted."}
+    else
+      redirect_to :back, flash: {danger: "You are not allowed to delete users."}
     end
   end
 

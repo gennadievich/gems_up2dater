@@ -26,4 +26,16 @@ feature "User login" do
     expect(page).to have_content("Check your email/password")
     expect(page).to have_button("Login")
   end
+
+  scenario "Logout" do
+    sign_in(user)
+
+    click_link("Logout")
+
+    expect(page).to have_css("header", text: "Gems up2dater")
+    expect(page).to have_text "Keep your gemlist up 2 date!"
+    expect(page).to have_link("Registration")
+    expect(page).to have_link("Log In")
+    expect(page).to have_content("See you soon!")
+  end
 end
