@@ -13,6 +13,7 @@ feature "Users" do
     click_button "Create user"
 
     expect(User.count).to be(1)
+    expect(User.first.role.name) == "user"
     expect(page).to have_content("Welcome, #{user_name}")
     expect(page).to have_content("You successfully registered!")
     expect(page).to have_content("#{user_name}'s page")
