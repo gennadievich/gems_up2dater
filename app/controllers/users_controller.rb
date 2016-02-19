@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :check_if_admin, only: [:index, :new, :edit, :destroy]
+
   def index
     @users = User.all.sort
   end
@@ -9,13 +11,23 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @roles = Role.all
+  end
+
+  def register
+    @user = User.new
   end
 
   def create
     @user = User.new(user_params)
 
     if current_user && current_user.admin?
-      redirect_to :back, flash: {warning: "In development..."}
+      if @user.save
+        redirect_to users_path, flash: {success: "#{@user.role.name.capitalize} #{@user.name} successfully created!"}
+      else
+        display_errors_for(@user)
+        render :register
+      end
     else
       if @user.save
         login @user
@@ -23,7 +35,26 @@ class UsersController < ApplicationController
         redirect_to user_path(@user), flash: {success: "You successfully registered!"}
       else
         display_errors_for(@user)
-        render :new
+        render :register
+      end
+    end
+  end
+
+  def edit
+    @user = User.find(params[:id])
+    @roles = Role.all
+  end
+
+  def update
+    @user = User.find(params[:id])
+    @roles = Role.all
+
+    if current_user.admin?
+      if @user.update(user_params)
+        redirect_to users_path, flash: {success: "User #{@user.name} successfully updated!"}
+      else
+        display_errors_for(@user)
+        render :edit
       end
     end
   end
@@ -45,6 +76,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :role_id)
   end
 end

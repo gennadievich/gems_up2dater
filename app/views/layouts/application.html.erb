@@ -4,7 +4,7 @@
     <title>Gems up2dater</title>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
-
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   </head>
 
@@ -25,5 +25,4 @@
       </div>
     </div>
   </body>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </html>

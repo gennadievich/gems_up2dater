@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post "/login" => "sessions#create"
   get  "/logout" => "sessions#destroy", as: :logout
 
-  get  "/register" => "users#new", as: :register
+  get  "/register" => "users#register", as: :register
   post "/register" => "users#create"
 
   get "/home/index" => "home#index", as: :home_page

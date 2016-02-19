@@ -15,10 +15,3 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-
-var main = function(){
-  $('.alert').click(function(){
-    $(this).hide(150);
-  });
-};
-$(document).ready(main);

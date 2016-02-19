@@ -1,8 +1,8 @@
 require "spec_helper"
 
 feature "Users" do
-  scenario "Create new user with valid data" do
-    visit new_user_path
+  scenario "Register new user with valid data" do
+    visit register_path
     user_name = Faker::Name.name
 
     fill_in "user_name",                  with: user_name
@@ -19,8 +19,8 @@ feature "Users" do
     expect(page).to have_content("#{user_name}'s page")
   end
 
-  scenario "Create new user with invalid data" do
-    visit new_user_path
+  scenario "Register new user with invalid data" do
+    visit register_path
 
     fill_in "user_name",                  with: nil
     fill_in "user_email",                 with: nil
