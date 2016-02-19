@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
+  USERS_PER_PAGE = 10
+
   before_action :check_if_admin, only: [:index, :new, :edit, :destroy]
 
   def index
-    @users = User.all.sort
+    @users = User.paginate(:page => params[:page], :per_page => USERS_PER_PAGE).order('id ASC')
   end
 
   def show

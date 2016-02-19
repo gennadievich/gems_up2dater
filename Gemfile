@@ -12,6 +12,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'redis', '~> 3.0'
 gem 'bcrypt', '~> 3.1.7'
+gem 'will_paginate'
 
 group :development, :test do
   gem 'byebug'
