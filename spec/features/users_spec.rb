@@ -35,10 +35,46 @@ feature "Users" do
     expect(page).to have_content("Email can't be blank")
   end
 
+  scenario "Admin creates new user with valid data" do
+    admin = FactoryGirl.create(:admin)
+    sign_in(admin)
+
+    visit new_user_path
+    user_name = Faker::Name.name
+
+    fill_in "user_name",                  with: user_name
+    fill_in "user_email",                 with: Faker::Internet.email
+    fill_in "user_password",              with: "pass"
+    fill_in "user_password_confirmation", with: "pass"
+
+    click_button "Create user"
+
+    expect(User.count).to be(2)
+    expect(page).to have_content("User #{user_name} successfully created!")
+  end
+
+  scenario "Admin creates new user with invalid data" do
+    admin = FactoryGirl.create(:admin)
+    sign_in(admin)
+
+    visit new_user_path
+
+    fill_in "user_name",                  with: nil
+    fill_in "user_email",                 with: nil
+    fill_in "user_password",              with: "pass"
+    fill_in "user_password_confirmation", with: "pass1"
+
+    click_button "Create user"
+
+    expect(User.count).to be(1)
+    expect(page).to have_content("Password confirmation doesn't match Password")
+    expect(page).to have_content("Name can't be blank")
+    expect(page).to have_content("Email can't be blank")
+  end
+
   scenario "Admin successfully deletes user" do
     user  = FactoryGirl.create(:user)
-    admin = FactoryGirl.create(:user)
-    admin.update_column(:role_id, 2)
+    admin = FactoryGirl.create(:admin)
 
     sign_in(admin)
     visit users_path
@@ -50,10 +86,8 @@ feature "Users" do
   end
 
   scenario "Admin tries to delete another admin" do
-    admin_del = FactoryGirl.create(:user)
-    admin_del.update_column(:role_id, 2)
-    admin = FactoryGirl.create(:user)
-    admin.update_column(:role_id, 2)
+    admin_del = FactoryGirl.create(:admin)
+    admin = FactoryGirl.create(:admin)
 
     sign_in(admin)
     visit users_path

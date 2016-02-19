@@ -38,4 +38,29 @@ feature "User login" do
     expect(page).to have_link("Log In")
     expect(page).to have_content("See you soon!")
   end
+
+  scenario "Admin successfully visits users page" do
+    admin = FactoryGirl.create(:admin)
+    sign_in(admin)
+
+    expect(page).to have_content("Welcome back, #{admin.name}")
+
+    visit users_path
+
+    expect(page).to have_css("table", text: "#{admin.email}")
+  end
+
+  scenario "User unsuccessfully visits users and create user page" do
+    sign_in(user)
+
+    expect(page).to have_content("Welcome back, #{user.name}")
+
+    visit users_path
+
+    expect(page).to have_content("You don't have access to this page")
+
+    visit new_user_path
+
+    expect(page).to have_content("You don't have access to this page")
+  end
 end
