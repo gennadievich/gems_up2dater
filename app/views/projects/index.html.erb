@@ -1,0 +1,14 @@
+<div class="title">
+  <h2 class="col-sm-3">Your Projects</h2>
+  <h2 class="col-sm-1 col-sm-offset-8">
+    <%= link_to "", new_user_project_path, html_options = {class: "glyphicon glyphicon-plus green", title: "Create new project"} %>
+  </h2>
+</div>
+
+<div>
+  <% if !@user_projects.present? %>
+    <%= link_to " Create your first project!", new_user_project_path, html_options = {class: "glyphicon glyphicon-plus green", title: "Create new project"} %>
+  <% else %>
+    <%= render partial: "project_list", locals: {projects: @user_projects} %>
+  <% end %>
+</div>

@@ -1,0 +1,62 @@
+<%= form_for [current_user, @project], html: {class: "form-horizontal"} do |f| %>
+  <div class="form-group">
+    <div class="col-sm-offset-4 col-sm-4">
+      <%= f.text_field :name, placeholder: :name, class: "form-control", autofocus: true%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-4 col-sm-4">
+      <%= f.text_area :description, placeholder: :description, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-4 col-sm-4">
+      <%= f.text_field :link, placeholder: "http://", class: "form-control"%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-4 col-sm-4">
+      <div class="input-group">
+        <span class="input-group-btn">
+          <span class="btn btn-primary btn-file">
+            Upload Gemfile <input type="file" name="project[file]" id="project_file">
+          </span>
+        </span>
+        <input type="text" class="form-control" readonly>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-4 col-sm-4">
+      <%= f.submit class: "btn btn-default" %>
+    </div>
+  </div>
+<% end %>
+
+<script>
+  $(document).on('change', '.btn-file :file', function() {
+    var input = $(this),
+      numFiles = input.get(0).files ? input.get(0).files.length : 1,
+      label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+    input.trigger('fileselect', [numFiles, label]);
+  });
+
+  $(document).ready( function() {
+    $('.btn-file :file').on('fileselect', function(event, numFiles, label) {
+
+      var input = $(this).parents('.input-group').find(':text'),
+        log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+      if( input.length ) {
+        input.val(log);
+      } else {
+        if( log ) alert(log);
+      }
+
+    });
+  });
+</script>

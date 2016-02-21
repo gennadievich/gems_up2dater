@@ -1,6 +1,9 @@
-<h2>All Users
-  <%= link_to "", new_user_path, html_options = {class: "glyphicon glyphicon-plus col-sm-offset-10 green", title: "Create new user"} %>
-</h2>
+<div class="title">
+  <h2 class="col-sm-3">All Users</h2>
+  <h2 class="col-sm-1 col-sm-offset-8">
+    <%= link_to "", new_user_path, html_options = {class: "glyphicon glyphicon-plus green", title: "Create new user"} %>
+  </h2>
+</div>
 
 <table class="table table-striped">
   <thead>

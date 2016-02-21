@@ -10,5 +10,9 @@ Rails.application.routes.draw do
 
   get "/home/index" => "home#index", as: :home_page
 
-  resources :users
+  resources :users do
+    resources :projects
+  end
+
+  resources :ruby_gems
 end
