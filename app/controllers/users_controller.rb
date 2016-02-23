@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  USERS_PER_PAGE = 10
+  USERS_PER_PAGE = 13
 
   before_action :check_if_admin, only: [:index, :new, :edit, :destroy]
 
