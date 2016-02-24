@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get  "/register" => "users#register", as: :register
   post "/register" => "users#create"
 
+  get  "/all_projects" => "projects#all_projects", as: :all_projects
+
   get "/home/index" => "home#index", as: :home_page
 
   resources :users do

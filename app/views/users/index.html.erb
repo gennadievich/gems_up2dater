@@ -1,47 +1,13 @@
-<div class="title">
-  <h2 class="col-sm-3">All Users</h2>
-  <h2 class="col-sm-1 col-sm-offset-8">
-    <%= link_to "", new_user_path, html_options = {class: "glyphicon glyphicon-plus green", title: "Create new user"} %>
-  </h2>
+<div class="row">
+  <div class="title">
+    <h2 class="col-sm-3">All Users</h2>
+    <h2 class="col-sm-1 col-sm-offset-8">
+      <%= link_to "", new_user_path, html_options = {class: "glyphicon glyphicon-plus green", title: "Create new user"} %>
+    </h2>
+  </div>
 </div>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Role</th>
-      <th>Sign in count</th>
-      <th>Register date</th>
-      <th>Controls</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
-      <tr class=<%= "success" if user.admin? %>>
-        <td><%= user.id %></td>
-        <td><%= user.name %></td>
-        <td><%= user.email %></td>
-        <td><%= user.role.name %></td>
-        <td><%= user.sign_in_count %></td>
-        <td><%= user.created_at.strftime("%d/%m/%Y") %></td>
-        <td>
-          <%= link_to "", user_path(user), class: "glyphicon glyphicon-info-sign", title: "User's page" %>
-          <%= link_to "", edit_user_path(user), class: "glyphicon glyphicon-cog", title: "Edit user" %>
-          <%= link_to "", user, method: :delete, data: {confirm: "Delete #{user.name}?"}, class: "glyphicon glyphicon-trash red", title: "Delete user" %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<% if will_paginate @users %>
-  <div class="apple_pagination">
-    <%= will_paginate @users, container: false %>
-    <div class="text-right">
-      <%= page_entries_info @users %>
-    </div>
-  </div>
-<% end %>
+<div class="row">
+  <%= render partial: "users/users_list", locals: {users: @users} %>
+  <%= render partial: "layouts/pagination", locals: {model: @users} %>
+</div>

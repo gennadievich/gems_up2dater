@@ -1,0 +1,8 @@
+<% if will_paginate model %>
+  <div class="apple_pagination">
+    <%= will_paginate model, container: false %>
+    <div class="text-right">
+      <%= page_entries_info model %>
+    </div>
+  </div>
+<% end %>

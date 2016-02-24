@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="title">
+    <h2 class="col-sm-3">All Projects</h2>
+  </div>
+</div>
+
+<div class="row">
+  <%= render partial: "project_list", locals: {projects: @projects} %>
+  <%= render partial: "layouts/pagination", locals: {model: @projects} %>
+</div>
