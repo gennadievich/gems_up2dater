@@ -26,7 +26,6 @@
       <td>Some info...</td>
       <td>
         <%= link_to "", user_project_path(current_user, project), class: "glyphicon glyphicon-info-sign", title: "Project info" %>
-        <%= link_to "", nil, class: "glyphicon glyphicon-cog", title: "Edit project" %>
         <%= link_to "", user_project_path(current_user, project), method: :delete, data: {confirm: "Delete #{project.name}?"}, class: "glyphicon glyphicon-trash red", title: "Delete project" %>
       </td>
     </tr>

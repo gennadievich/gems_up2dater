@@ -1,19 +1,25 @@
-<h2><%= @user.name %>'s page</h2>
+<div class="row">
+  <div class="title">
+    <h2><%= @user.name %>'s page</h2>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Register date</th>
-    </tr>
-  </thead>
+<div class="row">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Register date</th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <tr>
-      <td><%= @user.name %></td>
-      <td><%= @user.email %></td>
-      <td><%= @user.created_at.strftime("%d/%m/%Y") %></td>
-    </tr>
-  </tbody>
-</table>
+    <tbody>
+      <tr>
+        <td><%= @user.name %></td>
+        <td><%= @user.email %></td>
+        <td><%= @user.created_at.strftime("%d/%m/%Y") %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

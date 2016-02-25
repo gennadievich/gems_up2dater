@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="title">
+    <h2><%= @project.name %></h2>
+  </div>
+</div>
+
+<div class="row">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Link</th>
+        <th>Creation date</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><%= @project.name %></td>
+        <td><%= @project.description%></td>
+        <td><%= @project.link %></td>
+        <td><%= @project.created_at.strftime("%d/%m/%Y") %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
