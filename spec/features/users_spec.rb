@@ -36,7 +36,7 @@ feature "Users" do
   end
 
   scenario "Admin creates new user with valid data" do
-    admin = FactoryGirl.create(:admin)
+    admin = create(:admin)
     sign_in(admin)
 
     visit new_user_path
@@ -54,7 +54,7 @@ feature "Users" do
   end
 
   scenario "Admin creates new user with invalid data" do
-    admin = FactoryGirl.create(:admin)
+    admin = create(:admin)
     sign_in(admin)
 
     visit new_user_path
@@ -73,8 +73,8 @@ feature "Users" do
   end
 
   scenario "Admin successfully deletes user" do
-    user  = FactoryGirl.create(:user)
-    admin = FactoryGirl.create(:admin)
+    user  = create(:user)
+    admin = create(:admin)
 
     sign_in(admin)
     visit users_path
@@ -86,8 +86,8 @@ feature "Users" do
   end
 
   scenario "Admin tries to delete another admin" do
-    admin_del = FactoryGirl.create(:admin)
-    admin = FactoryGirl.create(:admin)
+    admin_del = create(:admin)
+    admin = create(:admin)
 
     sign_in(admin)
     visit users_path
@@ -96,5 +96,14 @@ feature "Users" do
 
     expect(User.count).to be(2)
     expect(page).to have_content("You are not allowed to delete admins.")
+  end
+
+  scenario "User visits his page" do
+    user = create(:user)
+    sign_in(user)
+    visit user_path(user)
+
+    expect(page).to have_text("#{user.name}'s page")
+    expect(page).to have_css("table")
   end
 end
