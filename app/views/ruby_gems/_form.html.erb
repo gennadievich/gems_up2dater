@@ -1,0 +1,5 @@
+<%= form_tag create_gem_user_project_path, class: "form-inline hidden", id: "ruby-gems-form" do %>
+  <%= text_field_tag "ruby_gem[name]", nil, placeholder: "Enter Gem name", class: "form-control" %>
+  <%= text_field_tag "ruby_gem[version]", nil, placeholder: "Enter version (optional)", class: "form-control" %>
+  <%= submit_tag "Add Gem", class: "btn btn-default" %>
+<% end %>

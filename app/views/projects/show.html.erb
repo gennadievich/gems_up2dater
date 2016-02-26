@@ -23,3 +23,9 @@
     </tbody>
   </table>
 </div>
+
+<div class="row">
+  <h3 class="col-sm-3">Project has <%= @project_gems.count %> gems.</h3>
+  <h3 class="col-sm-7"><%= render partial: "ruby_gems/form" %></h3>
+  <h3 class="col-sm-2"><%= button_to "Add new gems", nil, class: "btn btn-success", id: "add-new-gems-btn" %></h3>
+</div>

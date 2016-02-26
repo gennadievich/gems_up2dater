@@ -11,6 +11,7 @@ class ProjectsController < ApplicationController
 
   def show
     @project = current_user.projects.find(params[:id])
+    @project_gems = @project.ruby_gems.all
   end
 
   def new
@@ -26,6 +27,13 @@ class ProjectsController < ApplicationController
       display_errors_for(@project)
       render :new
     end
+  end
+
+  def create_gem
+    raise params.inspect
+    @ruby_gem = RubyGem.find_or_initialize_by(name: ruby_gem_params[:name])
+
+    raise @ruby_gem.inspect
   end
 
   def destroy
