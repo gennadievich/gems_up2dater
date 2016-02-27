@@ -1,8 +1,6 @@
-var main = function(){
-  $("#add-new-gems-btn").click(function(e){
+var main = function(e){
     e.preventDefault();
     $("#ruby-gems-form").toggleClass("hidden");
-  });
 };
 
-$(document).ready(main);
+$(document).on('click', '#add-new-gems-btn', main);
