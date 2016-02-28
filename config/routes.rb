@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :users do
     resources :projects do
       member do
-        post :create_gem
+        post :add_gem
       end
     end
   end

@@ -1,4 +1,7 @@
 class ProjectsController < ApplicationController
+
+  #include RubyGemsParser
+
   PROJECTS_PER_PAGE = 5
 
   def index
@@ -29,11 +32,20 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def create_gem
-    raise params.inspect
-    @ruby_gem = RubyGem.find_or_initialize_by(name: ruby_gem_params[:name])
+  def add_gem
+    gem_name = params[:ruby_gem][:name]
+    gem_version = params[:ruby_gem][:vesion]
 
-    raise @ruby_gem.inspect
+    if gem_name.blank?
+      redirect_to :back, flash: {warning: "Please enter gem name."}
+    end
+
+    #try to get info from rubygems
+
+    #find or create gem in local db (update current version)
+
+    #add gem to users project
+
   end
 
   def destroy

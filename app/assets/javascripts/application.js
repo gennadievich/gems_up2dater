@@ -22,6 +22,8 @@ var hideDiv = function(){
 
 $(document).on('click', '.alert', hideDiv);
 
+/*File upload.*/
+
 $(document).on('change', '.btn-file :file', function() {
   var input = $(this),
     numFiles = input.get(0).files ? input.get(0).files.length : 1,
