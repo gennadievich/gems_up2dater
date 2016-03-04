@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :check_if_admin, only: [:index, :new, :edit, :destroy]
 
   def index
-    @users = User.paginate(:page => params[:page], :per_page => USERS_PER_PAGE).order('id ASC')
+    @users = User.order('id DESC')
   end
 
   def show
@@ -14,6 +14,10 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     @roles = Role.all
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   def register
@@ -21,14 +25,16 @@ class UsersController < ApplicationController
   end
 
   def create
+    @users = User.order('id DESC')
     @user = User.new(user_params)
 
     if current_user && current_user.admin?
       if @user.save
-        redirect_to users_path, flash: {success: "#{@user.role.name.capitalize} #{@user.name} successfully created!"}
+        flash.now[:success] = "#{@user.role.name.capitalize} #{@user.name} successfully created!"
+        respond_to { |format| format.js }
       else
         display_errors_for(@user)
-        render :register
+        respond_to { |format| format.js }
       end
     else
       if @user.save

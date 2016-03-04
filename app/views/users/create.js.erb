@@ -1,0 +1,10 @@
+$("#users").html("<%= j (render partial: "users_list", locals: {users: @users}) %>");
+
+<% if flash[:warning].blank? %>
+  $("#user-form").slideUp(80);
+<% end %>
+
+<% unless flash.blank? %>
+  $("#errors").html("<%= j (render partial: "layouts/errors") %>");
+  $("#errors").slideDown(80);
+<% end %>

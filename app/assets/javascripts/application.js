@@ -17,10 +17,10 @@
 //= require_tree .
 
 var hideDiv = function(){
-    $(this).hide(150);
+    $(this).slideUp(80);
 };
 
-$(document).on('click', '.alert', hideDiv);
+$(document).on('click', '#errors', hideDiv);
 
 /*File upload.*/
 

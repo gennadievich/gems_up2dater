@@ -1,13 +1,16 @@
 <div class="row">
+  <div id="user-form" style="display: none;"></div>
+</div>
+
+<div class="row">
   <div class="title">
     <h2 class="col-sm-3">All Users</h2>
     <h2 class="col-sm-1 col-sm-offset-8">
-      <%= link_to "", new_user_path, html_options = {class: "glyphicon glyphicon-plus green", title: "Create new user"} %>
+      <%= link_to "", new_user_path, html_options = {class: "glyphicon glyphicon-plus green", title: "Create new user", remote: true} %>
     </h2>
   </div>
 </div>
 
-<div class="row">
+<div class="row" id="users">
   <%= render partial: "users/users_list", locals: {users: @users} %>
-  <%= render partial: "layouts/pagination", locals: {model: @users} %>
 </div>
