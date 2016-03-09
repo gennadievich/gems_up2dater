@@ -1,0 +1,26 @@
+$(".td-hide").slideUp(0);
+$(".glyphicon-minus").hide();
+$(".glyphicon-cog").show();
+$("#td-<%= params[:id] %>").slideDown(80);
+$("#user-<%= params[:id] %>-form").html("<%= j (render "user_form") %>");
+$("#user-<%= params[:id] %>-form").slideDown(80);
+
+$("#show-edit-user-<%= params[:id] %>-form-button").hide();
+$("#hide-edit-user-<%= params[:id] %>-form-button").show();
+
+$("#show-user-form-button").show();
+$("#hide-user-form-button").hide();
+$("#user-form").slideUp(80);
+
+$(document).on('click', '#hide-edit-user-<%= params[:id] %>-form-button', function(e){
+  e.preventDefault();
+  $("#show-edit-user-<%= params[:id] %>-form-button").show();
+  $("#hide-edit-user-<%= params[:id] %>-form-button").hide();
+
+  $("#td-<%= params[:id] %>").slideUp(80);
+});
+
+<% unless flash.blank? %>
+$("#user-<%= params[:id] %>-errors").html("<%= j (render partial: "layouts/errors") %>");
+$("#user-<%= params[:id] %>-errors").slideDown(80);
+<% end %>

@@ -1,2 +1,7 @@
+$(".td-hide").slideUp(0);
+$(".glyphicon-minus").hide();
+$(".glyphicon-cog").show();
+$("#show-user-form-button").hide();
+$("#hide-user-form-button").show();
 $("#user-form").html("<%= j (render "user_form") %>");
 $("#user-form").slideDown(80);

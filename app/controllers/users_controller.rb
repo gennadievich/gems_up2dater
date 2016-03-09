@@ -51,33 +51,41 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
     @roles = Role.all
+    @users = User.order('id DESC')
+
+    respond_to { |format| format.js }
   end
 
   def update
     @user = User.find(params[:id])
     @roles = Role.all
+    @users = User.order('id DESC')
 
     if current_user.admin?
       if @user.update(user_params)
-        redirect_to users_path, flash: {success: "User #{@user.name} successfully updated!"}
+        flash.now[:success] = "User #{@user.name} successfully updated!"
+        respond_to { |format| format.js }
       else
         display_errors_for(@user)
+
         render :edit
       end
     end
   end
 
   def destroy
+    @users = User.order('id DESC')
     @user = User.find(params[:id])
 
     if @user.admin?
-      redirect_to :back, flash: {danger: "You are not allowed to delete admins."}
+      flash.now[:danger] = "You are not allowed to delete admins."
     elsif current_user.admin?
       @user.delete
 
-      redirect_to :back, flash: {success: "User '#{@user.name}' was successfully deleted."}
+      flash.now[:success] = "User '#{@user.name}' was successfully deleted."
+      respond_to {|format| format.js}
     else
-      redirect_to :back, flash: {danger: "You are not allowed to delete users."}
+      flash.now[:danger] = "You are not allowed to delete users."
     end
   end
 

@@ -1,14 +1,18 @@
 <div class="row">
-  <div id="user-form" style="display: none;"></div>
-</div>
-
-<div class="row">
   <div class="title">
     <h2 class="col-sm-3">All Users</h2>
     <h2 class="col-sm-1 col-sm-offset-8">
-      <%= link_to "", new_user_path, html_options = {class: "glyphicon glyphicon-plus green", title: "Create new user", remote: true} %>
+      <%= link_to "", new_user_path, html_options = {class: "glyphicon glyphicon-plus green", id: "show-user-form-button", title: "Create new user", remote: true} %>
+      <%= link_to "", nil, html_options = {class: "glyphicon glyphicon-minus red display-none", id: "hide-user-form-button", title: "Hide form"} %>
     </h2>
   </div>
+</div>
+
+<div class="row">
+  <div class="container errors" id="user-errors" style="display: none;">
+    <%= render partial: "layouts/errors" %>
+  </div>
+  <div id="user-form" style="display: none;"></div>
 </div>
 
 <div class="row" id="users">

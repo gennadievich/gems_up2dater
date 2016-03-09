@@ -22,8 +22,17 @@
         <td><%= user.created_at.strftime("%d/%m/%Y") %></td>
         <td>
           <%= link_to "", user_path(user), class: "glyphicon glyphicon-info-sign", title: "User's page" %>
-          <%= link_to "", edit_user_path(user), class: "glyphicon glyphicon-cog", title: "Edit user" %>
-          <%= link_to "", user, method: :delete, data: {confirm: "Delete #{user.name}?"}, class: "glyphicon glyphicon-trash red", title: "Delete user" %>
+          <%= link_to "", edit_user_path(user), remote: true, class: "glyphicon glyphicon-cog", id: "show-edit-user-#{user.id}-form-button", title: "Edit user" %>
+          <%= link_to "", nil, html_options = {class: "glyphicon glyphicon-minus red display-none", id: "hide-edit-user-#{user.id}-form-button", title: "Hide form"} %>
+          <%= link_to "", user, method: :delete, remote: true, data: {confirm: "Delete #{user.name}?"}, class: "glyphicon glyphicon-trash red", title: "Delete user" %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="7" id="td-<%= user.id %>" class="display-none td-hide">
+        <div class="container errors display-none" id="user-<%= user.id %>-errors">
+          <%= render partial: "layouts/errors" %>
+        </div>
+        <div id="user-<%= user.id %>-form" ></div>
         </td>
       </tr>
     <% end %>
