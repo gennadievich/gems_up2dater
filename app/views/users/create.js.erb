@@ -1,3 +1,5 @@
+$("#show-user-form-button").show();
+$("#hide-user-form-button").hide();
 $("#users").html("<%= j (render partial: "users_list", locals: {users: @users}) %>");
 
 <% if flash[:warning].blank? %>

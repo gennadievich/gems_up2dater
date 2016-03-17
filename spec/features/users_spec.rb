@@ -35,11 +35,13 @@ feature "Users" do
     expect(page).to have_content("Email can't be blank")
   end
 
-  scenario "Admin creates new user with valid data" do
+  scenario "Admin creates new user with valid data", :js => true do
     admin = create(:admin)
     sign_in(admin)
 
-    visit new_user_path
+    visit users_path
+    click_link("show-user-form-button")
+
     user_name = Faker::Name.name
 
     fill_in "user_name",                  with: user_name
@@ -49,15 +51,15 @@ feature "Users" do
 
     click_button "Create user"
 
-    expect(User.count).to be(2)
     expect(page).to have_content("User #{user_name} successfully created!")
   end
 
-  scenario "Admin creates new user with invalid data" do
+  scenario "Admin creates new user with invalid data", :js => true do
     admin = create(:admin)
     sign_in(admin)
 
-    visit new_user_path
+    visit users_path
+    click_link("show-user-form-button")
 
     fill_in "user_name",                  with: nil
     fill_in "user_email",                 with: nil
@@ -70,32 +72,6 @@ feature "Users" do
     expect(page).to have_content("Password confirmation doesn't match Password")
     expect(page).to have_content("Name can't be blank")
     expect(page).to have_content("Email can't be blank")
-  end
-
-  scenario "Admin successfully deletes user" do
-    user  = create(:user)
-    admin = create(:admin)
-
-    sign_in(admin)
-    visit users_path
-
-    first('.glyphicon-trash').click #click delete button
-
-    expect(User.count).to be(1)
-    expect(page).to have_content("User '#{user.name}' was successfully deleted.")
-  end
-
-  scenario "Admin tries to delete another admin" do
-    admin_del = create(:admin)
-    admin = create(:admin)
-
-    sign_in(admin)
-    visit users_path
-
-    first('.glyphicon-trash').click #click delete button
-
-    expect(User.count).to be(2)
-    expect(page).to have_content("You are not allowed to delete admins.")
   end
 
   scenario "User visits his page" do

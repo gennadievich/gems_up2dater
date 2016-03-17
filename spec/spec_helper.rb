@@ -44,7 +44,7 @@ RSpec.configure do |config|
 
   config.order = "random"
 
-  config.before(:suite) do
+  config.before(:each) do
     Rails.application.load_seed # loading seeds
   end
 end
