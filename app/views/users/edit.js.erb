@@ -11,6 +11,7 @@ $("#hide-edit-user-<%= params[:id] %>-form-button").show();
 $("#show-user-form-button").show();
 $("#hide-user-form-button").hide();
 $("#user-form").slideUp(80);
+$(".alert").slideUp(80);
 
 $(document).on('click', '#hide-edit-user-<%= params[:id] %>-form-button', function(e){
   e.preventDefault();
