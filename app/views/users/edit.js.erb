@@ -2,8 +2,7 @@ $(".td-hide").slideUp(0);
 $(".glyphicon-minus").hide();
 $(".glyphicon-cog").show();
 $("#td-<%= params[:id] %>").slideDown(80);
-$("#user-<%= params[:id] %>-form").html("<%= j (render "user_form") %>");
-$("#user-<%= params[:id] %>-form").slideDown(80);
+$("#user-<%= params[:id] %>-form").html("<%= j (render "user_form") %>").slideDown(80);
 
 $("#show-edit-user-<%= params[:id] %>-form-button").hide();
 $("#hide-edit-user-<%= params[:id] %>-form-button").show();
@@ -22,6 +21,5 @@ $(document).on('click', '#hide-edit-user-<%= params[:id] %>-form-button', functi
 });
 
 <% unless flash.blank? %>
-$("#user-<%= params[:id] %>-errors").html("<%= j (render partial: "layouts/errors") %>");
-$("#user-<%= params[:id] %>-errors").slideDown(80);
+  $("#user-<%= params[:id] %>-errors").html("<%= j (render partial: "layouts/notifications") %>").slideDown(80);
 <% end %>

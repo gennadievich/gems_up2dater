@@ -1,12 +1,8 @@
-$("#show-user-form-button").show();
-$("#hide-user-form-button").hide();
-$("#users").html("<%= j (render partial: "users_list", locals: {users: @users}) %>");
+$("#user-notifications").html("<%= j (render partial: "layouts/notifications") %>").slideDown(80);
 
-<% if flash[:warning].blank? %>
+<% unless flash[:success].blank? %>
+  $("#users").html("<%= j (render partial: "users_list", locals: {users: @users}) %>");
   $("#user-form").slideUp(80);
-<% end %>
-
-<% unless flash.blank? %>
-  $("#user-errors").html("<%= j (render partial: "layouts/errors") %>");
-  $("#user-errors").slideDown(80);
+  $("#show-user-form-button").show();
+  $("#hide-user-form-button").hide();
 <% end %>

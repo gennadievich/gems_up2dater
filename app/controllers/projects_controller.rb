@@ -1,15 +1,9 @@
 class ProjectsController < ApplicationController
 
-  #include RubyGemsParser
-
-  PROJECTS_PER_PAGE = 5
-
-  def index
-    @user_projects = current_user.projects.paginate(:page => params[:page], :per_page => PROJECTS_PER_PAGE).order('name ASC')
-  end
+  before_action :set_user_projects, only: [:index, :create]
 
   def all_projects
-    @projects = Project.paginate(:page => params[:page], :per_page => PROJECTS_PER_PAGE).order('id ASC')
+    @projects = Project.order('id ASC')
   end
 
   def show
@@ -19,16 +13,20 @@ class ProjectsController < ApplicationController
 
   def new
     @project = current_user.projects.new
+    @user_projects = current_user.projects.order('name ASC')
+
+    respond_to { |format| format.js }
   end
 
   def create
     @project = current_user.projects.build(project_params)
 
     if @project.save
-      redirect_to user_projects_path, flash: {success: "Project '#{@project.name}' successfully created!"}
+      flash.now[:success] = "Project '#{@project.name}' successfully created!"
+      respond_to { |format| format.js }
     else
       display_errors_for(@project)
-      render :new
+      respond_to { |format| format.js }
     end
   end
 
@@ -63,5 +61,9 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:name, :description, :link)
+  end
+
+  def set_user_projects
+    @user_projects = current_user.projects.order('name ASC')
   end
 end

@@ -1,0 +1,8 @@
+$("#project-notifications").html("<%= j(render partial: "layouts/notifications") %>").slideDown(80);
+
+<% unless flash[:success].blank? %>
+  $("#project-form").slideUp(80);
+  $("#user-projects").html("<%= j(render partial: "project_list", locals: {projects: @user_projects}) %>");
+  $("#show-project-form-button").show();
+  $("#hide-project-form-button").hide();
+<% end %>

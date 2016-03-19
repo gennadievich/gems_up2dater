@@ -1,15 +1,8 @@
 class UsersController < ApplicationController
-  USERS_PER_PAGE = 13
 
   before_action :check_if_admin, only: [:index, :new, :edit, :destroy]
-
-  def index
-    @users = User.order('id DESC')
-  end
-
-  def show
-    @user = User.find(params[:id])
-  end
+  before_action :set_users, only: [:index, :create, :edit, :update, :destroy]
+  before_action :find_user, only: [:show, :edit, :update, :destroy]
 
   def new
     @user = User.new
@@ -25,7 +18,6 @@ class UsersController < ApplicationController
   end
 
   def create
-    @users = User.order('id DESC')
     @user = User.new(user_params)
 
     if current_user && current_user.admin?
@@ -49,17 +41,13 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
     @roles = Role.all
-    @users = User.order('id DESC')
 
     respond_to { |format| format.js }
   end
 
   def update
-    @user = User.find(params[:id])
     @roles = Role.all
-    @users = User.order('id DESC')
 
     if current_user.admin?
       if @user.update(user_params)
@@ -74,9 +62,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @users = User.order('id DESC')
-    @user = User.find(params[:id])
-
     if @user.admin?
       flash.now[:danger] = "You are not allowed to delete admins."
     elsif current_user.admin?
@@ -93,5 +78,13 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :role_id)
+  end
+
+  def set_users
+    @users = User.order('id DESC')
+  end
+
+  def find_user
+    @user = User.find(params[:id])
   end
 end

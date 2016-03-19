@@ -5,6 +5,5 @@ $("#users").html("<%= j (render partial: "users_list", locals: {users: @users}) 
 <% end %>
 
 <% unless flash.blank? %>
-  $("#user-errors").html("<%= j (render partial: "layouts/errors") %>");
-  $("#user-errors").slideDown(80);
+  $("#user-notifications").html("<%= j (render partial: "layouts/notifications") %>").slideDown(80);
 <% end %>

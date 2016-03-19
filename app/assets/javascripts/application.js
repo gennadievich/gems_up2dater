@@ -19,17 +19,9 @@
 var hideDiv = function(){
     $(this).slideUp(80);
 };
-
 $(document).on('click', '.errors', hideDiv);
 
-$(document).on('click', '#hide-user-form-button', function(e){
-  e.preventDefault();
-  $("#show-user-form-button").show();
-  $(".errors").slideUp(80);
-  $("#user-form").slideUp(80);
-  $("#hide-user-form-button").hide();
-});
-
+$(document).on('click', '.notifications', hideDiv);
 /*File upload.*/
 
 $(document).on('change', '.btn-file :file', function() {
