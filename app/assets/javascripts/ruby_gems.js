@@ -8,7 +8,6 @@ $(document).on('click', '#hide-name-version-form-button', function(e){
 });
 
 $(function() {
-  $('#loading-indicator').hide();  // hide it initially.
   $(document)
     .ajaxStart(function() {
       $('#loading-indicator').show(); // show on any Ajax event.
