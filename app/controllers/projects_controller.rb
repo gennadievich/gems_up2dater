@@ -8,7 +8,6 @@ class ProjectsController < ApplicationController
 
   def show
     @project = current_user.projects.find(params[:id])
-    @project_gems = @project.ruby_gems.all
   end
 
   def new

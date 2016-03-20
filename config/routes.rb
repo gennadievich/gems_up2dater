@@ -13,11 +13,7 @@ Rails.application.routes.draw do
   get "/home/index" => "home#index", as: :home_page
 
   resources :users do
-    resources :projects do
-      member do
-        post :add_gem
-      end
-    end
+    resources :projects
   end
 
   resources :ruby_gems do
