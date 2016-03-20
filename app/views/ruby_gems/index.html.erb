@@ -1,2 +1,28 @@
-<h1>RubyGems#index</h1>
-<p>Find me in app/views/ruby_gems/index.html.erb</p>
+<div class="row">
+  <div class="title">
+    <h2 class="col-sm-3">All Gems</h2>
+    <h2 class="col-sm-offset-8 col-sm-1">
+      <%= link_to "", new_ruby_gem_path, html_options = {class: "glyphicon glyphicon-search green", id: "show-name-version-form-button",
+                                                     title: "Add new gem", remote: true} %>
+      <%= link_to "", nil, html_options = {class: "glyphicon glyphicon-minus red display-none", id: "hide-name-version-form-button",
+                                           title: "Hide form"} %>
+    </h2>
+  </div>
+</div>
+
+<div class="on-top" id="loading-indicator"><%= image_tag("loading.gif", size: "360x240") %></div>
+
+<div class="row">
+  <div class="container notifications display-none" id="gem-notifications">
+    <%= render partial: "layouts/notifications" %>
+  </div>
+  <div class="col-sm-offset-4 col-sm-8" id="name-version-form" style="display: none;"></div>
+</div>
+
+<div class="row">
+  <div id="gem-form" style="display: none;"></div>
+</div>
+
+<div class="row" id="gems">
+  <%= render partial: "gems_list" %>
+</div>

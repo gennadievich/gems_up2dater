@@ -1,0 +1,21 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Info</th>
+    <th>Link</th>
+    <th>Total downloads</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @ruby_gems.each do |ruby_gem| %>
+    <tr>
+      <td><%= ruby_gem.name %></td>
+      <td><%= ruby_gem.description %></td>
+      <td><%= ruby_gem.link %></td>
+      <td><%= ruby_gem.total_downloads %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

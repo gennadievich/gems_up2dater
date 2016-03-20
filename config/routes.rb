@@ -20,5 +20,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :ruby_gems
+  resources :ruby_gems do
+    collection do
+      get :search
+    end
+  end
 end

@@ -1,0 +1,9 @@
+<%= form_tag search_ruby_gems_path, method: :get, class: "form-inline", remote: true do %>
+  <div class="form-group">
+    <%= text_field_tag "ruby_gem[name]", nil, placeholder: "Name", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= submit_tag "Find gem", class: "btn btn-default" %>
+  </div>
+<% end %>

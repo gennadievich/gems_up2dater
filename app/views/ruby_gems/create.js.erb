@@ -1,0 +1,5 @@
+$("#gem-notifications").html("<%= j (render partial: "layouts/notifications") %>").slideDown(80);
+$("#gems").html("<%= j (render partial: "gems_list") %>");
+$("#gem-form").slideUp(80);
+$("#show-name-version-form-button").show();
+$("#hide-name-version-form-button").hide();

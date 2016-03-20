@@ -1,7 +1,7 @@
 <%= form_for @user, html: {class: "form-horizontal"}, remote: true do |f| %>
   <div class="form-group">
     <div class="col-sm-offset-4 col-sm-4">
-      <%= f.text_field :name, placeholder: :name, class: "form-control", autofocus: true%>
+      <%= f.text_field :name, placeholder: :name, class: "form-control", autofocus: true %>
     </div>
   </div>
 
@@ -13,19 +13,19 @@
 
   <div class="form-group">
     <div class="col-sm-offset-4 col-sm-4">
-      <%= f.password_field :password, placeholder: :password, class: "form-control"%>
+      <%= f.password_field :password, placeholder: :password, class: "form-control" %>
     </div>
   </div>
 
   <div class="form-group">
     <div class="col-sm-offset-4 col-sm-4">
-      <%= f.password_field :password_confirmation, placeholder: :password_confirmation, class: "form-control"%>
+      <%= f.password_field :password_confirmation, placeholder: :password_confirmation, class: "form-control" %>
     </div>
   </div>
 
   <div class="form-group">
     <div class="col-sm-offset-4 col-sm-4">
-      <%= f.select :role_id, options_from_collection_for_select(@roles, "id", "name") ,{} ,class: "form-control"%>
+      <%= f.select :role_id, options_from_collection_for_select(@roles, "id", "name") ,{} ,class: "form-control" %>
     </div>
   </div>
 

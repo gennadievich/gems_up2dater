@@ -1,5 +1,46 @@
-<%= form_tag add_gem_user_project_path, class: "form-inline hidden", id: "ruby-gems-form" do %>
-  <%= text_field_tag "ruby_gem[name]", nil, placeholder: "Enter Gem name", class: "form-control" %>
-  <%= text_field_tag "ruby_gem[version]", nil, placeholder: "Enter version (optional)", class: "form-control" %>
-  <%= submit_tag "Add Gem", class: "btn btn-default" %>
+<%= form_for @ruby_gem, html: {class: "form-horizontal"}, remote: true do |f| %>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-8">
+      <%= f.label :name, class: "control-label col-sm-3" %>
+      <div class="col-sm-9">
+        <%= f.text_field :name, value: @gem_info["name"], class: "form-control" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-8">
+      <%= f.label :info, class: "control-label col-sm-3" %>
+      <div class="col-sm-9">
+        <%= f.text_area :description, rows: 5, value: @gem_info["info"], class: "form-control" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-8">
+      <%= f.label :link, class: "control-label col-sm-3" %>
+      <div class="col-sm-9">
+        <%= f.text_field :link, value: @gem_info["project_uri"], class: "form-control"%>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-8">
+      <%= f.label :downloads, class: "control-label col-sm-3" %>
+      <div class="col-sm-9">
+        <%= f.text_field :total_downloads, value: @gem_info["downloads"], class: "form-control" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-8">
+      <div class="col-sm-offset-3 col-sm-9">
+        <%= f.submit "Add gem", class: "btn btn-default" %>
+      </div>
+    </div>
+  </div>
+
 <% end %>
