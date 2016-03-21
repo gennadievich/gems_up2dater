@@ -14,15 +14,14 @@ class RubyGemsController < ApplicationController
     if gem_name.blank?
       flash.now[:warning] = "Please enter gem name!"
       respond_to { |format| format.js }
-    end
+    else
+      unless RubyGem.find_by(name: gem_name)
+        @gem_info = Gems.info(gem_name)
 
-    unless RubyGem.find_by(name: gem_name)
-      @gem_info = Gems.info(gem_name)
-
-      if @gem_info.is_a?(Hash) && !@gem_info.blank?
-        respond_to { |format| format.js }
+        if @gem_info.is_a?(Hash) && !@gem_info.blank?
+          respond_to { |format| format.js }
+        end
       end
-
     end
 
   end
