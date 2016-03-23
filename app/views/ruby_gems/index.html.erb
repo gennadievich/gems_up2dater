@@ -1,6 +1,7 @@
+<div id="mask"></div>
 <div class="row">
   <div class="title">
-    <h2 class="col-sm-3">All Gems</h2>
+    <h2 class="col-sm-3 title">All Gems</h2>
     <h2 class="col-sm-offset-8 col-sm-1">
       <%= link_to "", new_ruby_gem_path, html_options = {class: "glyphicon glyphicon-search green", id: "show-name-version-form-button",
                                                      title: "Add new gem", remote: true} %>
@@ -10,7 +11,7 @@
   </div>
 </div>
 
-<div class="on-top display-none" id="loading-indicator"><%= image_tag("loading.gif", size: "360x240") %></div>
+<div class="on-top display-none" id="loading-indicator"><%= image_tag("loading.gif", size: "180x180") %></div>
 
 <div class="row">
   <div class="container notifications display-none" id="gem-notifications">

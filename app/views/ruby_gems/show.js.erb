@@ -1,0 +1,5 @@
+$('.title').html("<h2>Gem info</h2>").addClass('col-sm-3');
+$('#gems').html("<%= j(render partial: "gem_info") %>").slideDown(80);
+$('.notifications').slideUp(80);
+$('#name-version-form').slideUp(80);
+$('#hide-name-version-form-button').hide();

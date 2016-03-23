@@ -45,3 +45,15 @@ $(document).ready( function() {
 
   });
 });
+
+$(function() {
+  $(document)
+    .ajaxStart(function() {
+      $('#loading-indicator').show(); // show on any Ajax event.
+      $('#mask').show();
+    })
+    .ajaxStop(function() {
+      $('#loading-indicator').hide(); // hide it when it is done.
+      $('#mask').hide();
+    });
+});

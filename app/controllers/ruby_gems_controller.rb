@@ -8,18 +8,24 @@ class RubyGemsController < ApplicationController
   end
 
   def search
-    @ruby_gem = RubyGem.new
     gem_name = search_params[:name]
+    @ruby_gem = RubyGem.find_by(name: gem_name)
 
     if gem_name.blank?
       flash.now[:warning] = "Please enter gem name!"
       respond_to { |format| format.js }
     else
-      unless RubyGem.find_by(name: gem_name)
+      if @ruby_gem
+        redirect_to(ruby_gem_path(@ruby_gem), format: :html)
+      else
+        @ruby_gem = RubyGem.new
         @gem_info = Gems.info(gem_name)
 
         if @gem_info.is_a?(Hash) && !@gem_info.blank?
+          flash.now[:success] = "We don't have this gem yet!"
           respond_to { |format| format.js }
+        else
+          flash.now[:warning] = "Can't find '#{gem_name}' gem!"
         end
       end
     end
