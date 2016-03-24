@@ -37,6 +37,24 @@
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-8">
+      <%= f.label :current_version, class: "control-label col-sm-3" %>
+      <div class="col-sm-9">
+        <%= f.text_field "version[name]", value: @gem_info["version"], class: "form-control" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-8">
+      <%= f.label :version_downloads, class: "control-label col-sm-3" %>
+      <div class="col-sm-9">
+        <%= f.text_field "version[this_version_downloads]", value: @gem_info["version_downloads"], class: "form-control" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-8">
       <div class="col-sm-offset-3 col-sm-9">
         <%= f.submit "Add gem", class: "btn btn-default" %>
       </div>

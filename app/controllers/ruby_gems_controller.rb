@@ -1,5 +1,6 @@
 class RubyGemsController < ApplicationController
-  before_action :set_ruby_gems, only: [:index, :create]
+  before_action :check_if_admin
+  before_action :set_ruby_gems, only: [:index, :create, :destroy]
 
   def index
   end
@@ -34,8 +35,10 @@ class RubyGemsController < ApplicationController
 
   def create
     @ruby_gem = RubyGem.new(ruby_gem_params)
+    build_gem_version
 
     if @ruby_gem.save
+      @ruby_gem_version.save
       flash.now[:success] = "Gem '#{@ruby_gem.name}' successfully created!"
       respond_to { |format| format.js }
     end
@@ -43,6 +46,18 @@ class RubyGemsController < ApplicationController
 
   def show
     @ruby_gem = RubyGem.find(params[:id])
+  end
+
+  def destroy
+    @ruby_gem = RubyGem.find(params[:id])
+    if current_user.admin?
+      @ruby_gem.delete
+
+      flash.now[:success] = "Gem '#{@ruby_gem.name}' was successfully deleted."
+      respond_to {|format| format.js}
+    else
+      flash.now[:danger] = "You are not allowed to delete gems."
+    end
   end
 
   private
@@ -55,7 +70,16 @@ class RubyGemsController < ApplicationController
     params.require(:ruby_gem).permit(:name, :description, :link, :total_downloads)
   end
 
+  def ruby_gem_version_params
+    params.require(:ruby_gem).require(:version).permit(:name, :this_version_downloads)
+  end
+
   def set_ruby_gems
     @ruby_gems = RubyGem.order("name asc")
+  end
+
+  def build_gem_version
+    @ruby_gem_version = @ruby_gem.gem_versions.build(ruby_gem_version_params)
+    @ruby_gem_version.actual = true
   end
 end
