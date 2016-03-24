@@ -35,10 +35,11 @@ class RubyGemsController < ApplicationController
 
   def create
     @ruby_gem = RubyGem.new(ruby_gem_params)
-    build_gem_version
 
     if @ruby_gem.save
-      @ruby_gem_version.save
+      get_all_versions_for_gem(@ruby_gem)
+      @ruby_gem.gem_versions.set_actual_version
+
       flash.now[:success] = "Gem '#{@ruby_gem.name}' successfully created!"
       respond_to { |format| format.js }
     end
@@ -51,6 +52,7 @@ class RubyGemsController < ApplicationController
   def destroy
     @ruby_gem = RubyGem.find(params[:id])
     if current_user.admin?
+      @ruby_gem.gem_versions.delete_all
       @ruby_gem.delete
 
       flash.now[:success] = "Gem '#{@ruby_gem.name}' was successfully deleted."
@@ -70,16 +72,21 @@ class RubyGemsController < ApplicationController
     params.require(:ruby_gem).permit(:name, :description, :link, :total_downloads)
   end
 
-  def ruby_gem_version_params
-    params.require(:ruby_gem).require(:version).permit(:name, :this_version_downloads)
-  end
-
   def set_ruby_gems
     @ruby_gems = RubyGem.order("name asc")
   end
 
-  def build_gem_version
-    @ruby_gem_version = @ruby_gem.gem_versions.build(ruby_gem_version_params)
-    @ruby_gem_version.actual = true
+  def get_all_versions_for_gem(gem)
+    versions = Gems.versions(gem.name)
+    versions.each do |version|
+      gem.gem_versions.build(
+                        name: version['number'],
+                        date: version['built_at'],
+                        this_version_downloads: version['downloads_count'],
+                        actual: false,
+                        prerelease: version['prerelease']
+      )
+      gem.save
+    end
   end
 end
