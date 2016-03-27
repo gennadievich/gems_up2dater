@@ -5,6 +5,7 @@
     <th>Info</th>
     <th>Link</th>
     <th>Total downloads</th>
+    <th>Total versions</th>
   </tr>
   </thead>
 
@@ -13,7 +14,18 @@
       <td><%= @ruby_gem.name %></td>
       <td><%= @ruby_gem.description %></td>
       <td><%= @ruby_gem.link %></td>
-      <td><%= @ruby_gem.total_downloads %></td>
+      <td><%= number_with_delimiter(@ruby_gem.total_downloads) %></td>
+      <td><%= @ruby_gem.gem_versions.count %></td>
+    </tr>
+    <tr>
+      <td colspan="5"><%= link_to "Show versions info", ruby_gem_gem_versions_path(@ruby_gem), remote: true,
+                                  class: 'btn btn-default', id: 'show-versions' %>
+        <%= link_to "Hide versions info", nil, remote: true,
+                    class: 'btn btn-default display-none', id: 'hide-versions' %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="5" class="display-none" id="gem-versions"></td>
     </tr>
   </tbody>
 </table>

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   end
 
   resources :ruby_gems do
+    resources :gem_versions
     collection do
       get :search
     end

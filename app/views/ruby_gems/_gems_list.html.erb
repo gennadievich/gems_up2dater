@@ -5,6 +5,7 @@
     <th>Info</th>
     <th>Link</th>
     <th>Total downloads</th>
+    <th>Total versions</th>
     <th>Controls</th>
   </tr>
   </thead>
@@ -16,6 +17,7 @@
       <td><%= ruby_gem.description %></td>
       <td><%= ruby_gem.link %></td>
       <td><%= number_with_delimiter(ruby_gem.total_downloads) %></td>
+      <td><%= ruby_gem.gem_versions.count %></td>
       <td>
         <%= link_to "", ruby_gem_path(ruby_gem), remote: true, class: "glyphicon glyphicon-info-sign", title: "Gem's info" %>
         <%= link_to "", ruby_gem, method: :delete, remote: true, data: {confirm: "Delete #{ruby_gem.name}?"}, class: "glyphicon glyphicon-trash red", title: "Delete gem" %>

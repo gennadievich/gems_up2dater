@@ -1,12 +1,7 @@
 class RubyGemsController < ApplicationController
   before_action :check_if_admin
   before_action :set_ruby_gems, only: [:index, :create, :destroy]
-
-  def index
-  end
-
-  def new
-  end
+  before_action :find_ruby_gem, only: [:show, :destroy]
 
   def search
     gem_name = search_params[:name]
@@ -45,12 +40,7 @@ class RubyGemsController < ApplicationController
     end
   end
 
-  def show
-    @ruby_gem = RubyGem.find(params[:id])
-  end
-
   def destroy
-    @ruby_gem = RubyGem.find(params[:id])
     if current_user.admin?
       @ruby_gem.gem_versions.delete_all
       @ruby_gem.delete
@@ -74,6 +64,10 @@ class RubyGemsController < ApplicationController
 
   def set_ruby_gems
     @ruby_gems = RubyGem.order("name asc")
+  end
+
+  def find_ruby_gem
+    @ruby_gem = RubyGem.find(params[:id])
   end
 
   def get_all_versions_for_gem(gem)

@@ -1,0 +1,27 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Version downloads</th>
+      <th>Is actual?</th>
+      <th>Prerelease?</th>
+      <th>Controls</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @gem_versions.each do |version| %>
+    <tr>
+      <td><%= version.name %></td>
+      <td><%= version.date.strftime("%d/%m/%Y") %></td>
+      <td><%= number_with_delimiter(version.this_version_downloads) %></td>
+      <td><%= version.actual %></td>
+      <td><%= version.prerelease %></td>
+      <td>
+
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

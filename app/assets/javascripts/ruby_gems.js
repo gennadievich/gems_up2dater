@@ -6,3 +6,10 @@ $(document).on('click', '#hide-name-version-form-button', function(e){
   $("#gem-form").slideUp(80);
   $("#hide-name-version-form-button").hide();
 });
+
+$(document).on('click', '#hide-versions', function(e){
+  e.preventDefault();
+  $("#gem-versions").slideUp(80);
+  $("#hide-versions").hide();
+  $("#show-versions").show();
+});
