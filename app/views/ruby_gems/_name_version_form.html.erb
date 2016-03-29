@@ -1,9 +1,13 @@
-<%= form_tag search_ruby_gems_path, method: :get, class: "form-inline", remote: true do %>
+<%= form_tag track_user_project_ruby_gems_path(@current_user, @project), method: :get, class: "form-inline", remote: true do %>
   <div class="form-group">
-    <%= text_field_tag "ruby_gem[name]", nil, placeholder: "Name", class: "form-control" %>
+    <%= text_field_tag "ruby_gem[name]", nil, placeholder: "Enter gem name", class: "form-control", autofocus: true %>
   </div>
 
   <div class="form-group">
-    <%= submit_tag "Find gem", class: "btn btn-default" %>
+    <%= text_field_tag "ruby_gem[version]", nil, placeholder: "Enter version", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= submit_tag "Find and track gem", class: "btn btn-default" %>
   </div>
 <% end %>

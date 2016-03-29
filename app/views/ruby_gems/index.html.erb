@@ -3,9 +3,9 @@
   <div class="title">
     <h2 class="col-sm-3 title">All Gems</h2>
     <h2 class="col-sm-offset-8 col-sm-1">
-      <%= link_to "", new_ruby_gem_path, html_options = {class: "glyphicon glyphicon-search green", id: "show-name-version-form-button",
+      <%= link_to "", new_ruby_gem_path, html_options = {class: "glyphicon glyphicon-search green", id: "show-name-form-button",
                                                      title: "Add new gem", remote: true} %>
-      <%= link_to "", nil, html_options = {class: "glyphicon glyphicon-minus red display-none", id: "hide-name-version-form-button",
+      <%= link_to "", nil, html_options = {class: "glyphicon glyphicon-minus red display-none", id: "hide-name-form-button",
                                            title: "Hide form"} %>
     </h2>
   </div>
@@ -17,7 +17,7 @@
   <div class="container notifications display-none" id="gem-notifications">
     <%= render partial: "layouts/notifications" %>
   </div>
-  <div class="col-sm-offset-4 col-sm-8" id="name-version-form" style="display: none;"></div>
+  <div class="col-sm-offset-4 col-sm-8" id="name-form" style="display: none;"></div>
 </div>
 
 <div class="row">

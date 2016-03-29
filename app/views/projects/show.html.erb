@@ -5,12 +5,23 @@
 </div>
 
 <div class="row">
+  <div class="container notifications display-none" id="gem-notifications">
+    <%= render partial: "layouts/notifications" %>
+  </div>
+  <div class="col-sm-offset-3 col-sm-8" id="name-version-form" style="display: none;">
+    <%= render partial: "ruby_gems/name_version_form" %>
+  </div>
+</div>
+
+<div class="row">
   <table class="table table-striped">
     <thead>
       <tr>
         <th>Description</th>
         <th>Link</th>
         <th>Creation date</th>
+        <th>Gems tracking</th>
+        <th>Controls</th>
       </tr>
     </thead>
 
@@ -19,6 +30,13 @@
         <td><%= @project.description%></td>
         <td><%= @project.link %></td>
         <td><%= @project.created_at.strftime("%d/%m/%Y") %></td>
+        <td><%= @project.ruby_gems.count %></td>
+        <td>
+          <%= link_to "", nil, html_options = {class: "glyphicon glyphicon-plus green", id: "show-name-version-form-button",
+                                               title: "Track new gem", remote: true} %>
+          <%= link_to "", nil, html_options = {class: "glyphicon glyphicon-minus red display-none", id: "hide-name-version-form-button",
+                                               title: "Hide form"} %>
+        </td>
       </tr>
     </tbody>
   </table>

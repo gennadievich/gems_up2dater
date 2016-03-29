@@ -4,7 +4,7 @@ class RubyGemsController < ApplicationController
   before_action :find_ruby_gem, only: [:show, :destroy]
 
   def search
-    gem_name = search_params[:name]
+    gem_name = ruby_gem_params[:name]
     @ruby_gem = RubyGem.find_by(name: gem_name)
 
     if gem_name.blank?
@@ -25,7 +25,18 @@ class RubyGemsController < ApplicationController
         end
       end
     end
+  end
 
+  def track
+    gem_name = ruby_gem_params[:name]
+    gem_vers = ruby_gem_params[:version]
+    project  = Project.find(params[:project_id])
+    @ruby_gem = RubyGem.find_by(name: gem_name)
+    @gem_vers = @ruby_gem.gem_versions.find_by(name: gem_vers) if @ruby_gem
+
+    if @gem_vers
+
+    end
   end
 
   def create
@@ -54,12 +65,8 @@ class RubyGemsController < ApplicationController
 
   private
 
-  def search_params
-    params.require(:ruby_gem).permit(:name)
-  end
-
   def ruby_gem_params
-    params.require(:ruby_gem).permit(:name, :description, :link, :total_downloads)
+    params.require(:ruby_gem).permit(:name, :description, :link, :total_downloads, :version)
   end
 
   def set_ruby_gems

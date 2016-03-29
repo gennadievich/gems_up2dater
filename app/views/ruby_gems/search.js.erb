@@ -1,6 +1,6 @@
 $("#gem-notifications").html("<%= j (render partial: "layouts/notifications") %>").slideDown(80);
 
 <% unless flash[:warning] %>
-$("#name-version-form").slideUp(80);
+$("#name-form").slideUp(80);
 $("#gem-form").html("<%= j(render partial: "ruby_gems/form") %>").slideDown(80);
 <% end %>

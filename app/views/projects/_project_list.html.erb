@@ -8,7 +8,7 @@
       <th>Desription</th>
       <th>Link</th>
       <th>Creation date</th>
-      <th>Gems info</th>
+      <th>Gems tracking</th>
       <th>Controls</th>
     </tr>
   </thead>
@@ -23,7 +23,7 @@
       <td><%= project.description %></td>
       <td><%= project.link %></td>
       <td><%= project.created_at.strftime("%d/%m/%Y") %></td>
-      <td>Some info...</td>
+      <td><%= project.ruby_gems.count %></td>
       <td>
         <%= link_to "", user_project_path(current_user, project), class: "glyphicon glyphicon-info-sign", title: "Project info" %>
         <%= link_to "", user_project_path(current_user, project), method: :delete, data: {confirm: "Delete #{project.name}?"}, class: "glyphicon glyphicon-trash red", title: "Delete project" %>
