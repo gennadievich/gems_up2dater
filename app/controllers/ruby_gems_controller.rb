@@ -31,11 +31,11 @@ class RubyGemsController < ApplicationController
     gem_name = ruby_gem_params[:name]
     gem_vers = ruby_gem_params[:version]
     project  = Project.find(params[:project_id])
-    @ruby_gem = RubyGem.find_by(name: gem_name)
-    @gem_vers = @ruby_gem.gem_versions.find_by(name: gem_vers) if @ruby_gem
+    ruby_gem = RubyGem.find_by(name: gem_name)
+    gem_vers = ruby_gem.gem_versions.find_by(name: gem_vers) if ruby_gem
 
-    if @gem_vers
-
+    if gem_vers
+      project.gem_versions << gem_vers
     end
   end
 
