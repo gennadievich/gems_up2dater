@@ -40,5 +40,26 @@
       </tr>
     </tbody>
   </table>
+
+  <% if @project.gem_versions.count > 0 %>
+    <h3>Gem list</h3>
+    <table class="table table-striped">
+      <thead>
+        <th>Gem</th>
+        <th>Version</th>
+        <th>Info</th>
+      </thead>
+
+      <tbody>
+        <% @project.gem_versions.each do |gem_version| %>
+          <tr>
+            <td><%= gem_version.ruby_gem.name %></td>
+            <td><%= gem_version.name %></td>
+            <td></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 </div>
 
